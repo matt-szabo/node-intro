@@ -1,5 +1,9 @@
 var request = require('request-promise');
 
+function getDistance(pos1, pos2) {
+  return Math.sqrt(Math.pow(pos1.lat - pos2.lat, 2) + Math.pow(pos1.lng - pos2.lng, 2));
+}
+
 function getIssPosition() {
   return request('http://api.open-notify.org/iss-now.json')
   .then(
@@ -49,10 +53,10 @@ var geo_loc = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + add
   )
 }
   
-getAddressPosition(address)
-.catch(function(err){
-    console.log(err, "Google error")
-})
+// getAddressPosition(address)
+// .catch(function(err){
+//     console.log(err, "Google error")
+// })
 
 // Complete the code of the function. The position parameter is an object with lat and lng.
 // Make sure your function only returns a Promise for the current temperature (a number) and nothing else
@@ -68,7 +72,7 @@ return request(latlng)
       var dsObj = {};
       
       dsObj.currTemp = dsResponse.currently.temperature;
-     console.log("Current temp is: " + dsObj.currTemp);
+     //console.log("Current temp is: " + dsObj.currTemp);
      return dsObj;
     }
   )
@@ -93,14 +97,25 @@ function getCurrentTemperature(address) {
 
 }
 
-getCurrentTemperature(address)
+//getCurrentTemperature(address)
 
 function getDistanceFromIss(address) {
 
+console.log(address, "running")
+
+Promise.all([getAddressPosition(address), getIssPosition()])
+.then(function(data){
+  //console.log(data)
+  
+  console.log("I currently live "+ getDistance(data[0], data[1]) + " kms away from the space station");
+ return getDistance(data[0], data[1]);
+ // return Math.sqrt(Math.pow(data[0].lat - data[1].lat, 2) + Math.pow(data[0].lng - data[1].lng, 2));
+//  })
+//.catch(function(err)  console.log(err)
+})
 }
+
+getDistanceFromIss(address)
 
 
 // Euclidian distance between two points
-function getDistance(pos1, pos2) {
-  return Math.sqrt(Math.pow(pos1.lat - pos2.lat, 2) + Math.pow(pos1.lng - pos2.lng, 2));
-}
