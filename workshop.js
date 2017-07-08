@@ -1,5 +1,6 @@
 var request = require('request-promise');
 
+
 function getDistance(pos1, pos2) {
   return Math.sqrt(Math.pow(pos1.lat - pos2.lat, 2) + Math.pow(pos1.lng - pos2.lng, 2));
 }
@@ -29,8 +30,8 @@ getIssPosition()
     console.log(err, "iss error")
 })
 
-//var address="2212 des Migrations, Montreal, Quebec";
-var address="Montreal";
+var address="2212 des Migrations, Montreal, Quebec";
+//var address="Montreal";
 
 function getAddressPosition(address) {
 
@@ -73,7 +74,7 @@ return request(latlng)
       var dsObj = {};
       
       dsObj.currTemp = dsResponse.currently.temperature;
-     console.log("Current temp is: " + dsObj.currTemp);
+     console.log("Current temp is: " + (dsObj.currTemp-32)*5/9 + " degrees Celcius.");
      return dsObj;
     }
   )
@@ -81,12 +82,16 @@ return request(latlng)
 
 getAddressPosition(address)
 .then(getCurrentTemperatureAtPosition)
+
+
+
 // .then(function(data){
 //   console.log(data);
 // })
 //.then(function(data){
   //then handle data
 //})
+
 .catch(function(err){
   console.log(err)
 })
@@ -104,18 +109,20 @@ getAddressPosition(address)
 .then(getCurrentTemperatureAtPosition)}
 
 
-getCurrentTemperature(address)
+
+
+//getCurrentTemperature(address)
 
 function getDistanceFromIss(address) {
 
-console.log(address, "running")
+//console.log(address, "running")
 
 Promise.all([getAddressPosition(address), getIssPosition()])
 .then(function(data){
   //console.log(data)
   
-  console.log("I currently live "+ getDistance(data[0], data[1]) + " kms away from the space station");
- return getDistance(data[0], data[1]);
+  console.log("I currently live "+ getDistance(data[1], data[0]) + " kms away from the space station");
+ return getDistance(data[1], data[0]);
  // return Math.sqrt(Math.pow(data[0].lat - data[1].lat, 2) + Math.pow(data[0].lng - data[1].lng, 2));
 //  })
 //.catch(function(err)  console.log(err)
