@@ -29,7 +29,8 @@ getIssPosition()
     console.log(err, "iss error")
 })
 
-var address="2212 des Migrations, Montreal, Quebec";
+//var address="2212 des Migrations, Montreal, Quebec";
+var address="Montreal";
 
 function getAddressPosition(address) {
 
@@ -79,8 +80,9 @@ return request(latlng)
 }
 
 getAddressPosition(address)
-.then(function(latLng){
-  getCurrentTemperatureAtPosition(latLng)
+.then(getCurrentTemperatureAtPosition)
+.then(function(data){
+  console.log(data);
 })
 //.then(function(data){
   //then handle data
