@@ -73,7 +73,7 @@ return request(latlng)
       var dsObj = {};
       
       dsObj.currTemp = dsResponse.currently.temperature;
-     //console.log("Current temp is: " + dsObj.currTemp);
+     console.log("Current temp is: " + dsObj.currTemp);
      return dsObj;
     }
   )
@@ -81,9 +81,9 @@ return request(latlng)
 
 getAddressPosition(address)
 .then(getCurrentTemperatureAtPosition)
-.then(function(data){
-  console.log(data);
-})
+// .then(function(data){
+//   console.log(data);
+// })
 //.then(function(data){
   //then handle data
 //})
@@ -91,15 +91,20 @@ getAddressPosition(address)
   console.log(err)
 })
 
+// function getCurrentTemperature(address) {
+//   getAddressPosition(address)
+// .then(function(latLng){
+//   getCurrentTemperatureAtPosition(latLng)
+// })
+
+// }
+
 function getCurrentTemperature(address) {
-  getAddressPosition(address)
-.then(function(latLng){
-  getCurrentTemperatureAtPosition(latLng)
-})
+getAddressPosition(address)
+.then(getCurrentTemperatureAtPosition)}
 
-}
 
-//getCurrentTemperature(address)
+getCurrentTemperature(address)
 
 function getDistanceFromIss(address) {
 
