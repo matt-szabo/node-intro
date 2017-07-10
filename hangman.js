@@ -47,14 +47,14 @@ return guess.toLowerCase();
 
 //CANNOT GET VALIDATE TO WORK 
 
-// validate: function (guess) {
-//     // var mmm = "/([A-z,-])/g";
-//       var pass = guess.match(/^([01]{1})?[-.\s]?\(?(\d{3})\)?[-.\s]?(\d{3})[-.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?){1}(?:\d+)?)?$/);
-//       if (pass) {
-//         return true;
-//       }
-//       return 'Please enter a valid alpha character or hyphen. Those work too!';
-//     }
+validate: function (guess) {
+    var mmm = /[A-z-]/g;
+      var pass = guess.match(mmm);
+      if (pass) {
+        return true;
+      }
+      return 'Please enter a valid alpha character or hyphen. Those work too!';
+    }
 })
 .then(function(answers) {
   
@@ -87,7 +87,7 @@ return guess.toLowerCase();
         //getWord();
         }
    
-  if (chances <= 0 && n<0)
+  if (chances == 0 && n<0)
   {
     
     console.log("That letter was not found.");
