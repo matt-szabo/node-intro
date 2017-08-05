@@ -121,8 +121,8 @@ Promise.all([getAddressPosition(address), getIssPosition()])
 .then(function(data){
   //console.log(data)
   
-  console.log("I currently live "+ getDistance(data[1], data[0]) + " kms away from the space station");
- return getDistance(data[1], data[0]);
+  console.log("I currently live "+ getDistance(data[0], data[1]) + " kms away from the space station");
+ return getDistance(data[0], data[1]);
  // return Math.sqrt(Math.pow(data[0].lat - data[1].lat, 2) + Math.pow(data[0].lng - data[1].lng, 2));
 //  })
 //.catch(function(err)  console.log(err)

@@ -45,7 +45,6 @@ filter: function (guess){
 return guess.toLowerCase();
 },
 
-//CANNOT GET VALIDATE TO WORK 
 
 validate: function (guess) {
     var mmm = /[A-z-]/g;
